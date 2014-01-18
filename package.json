@@ -1,0 +1,36 @@
+{
+  "name": "cucumberjs-examples",
+  "version": "0.1.0",
+  "description": "Examples of using CucumberJS.",
+  "author": {
+    "name": "Todd Anderson",
+    "email": "toddanderson@taanderson.com",
+    "url": "http://custardbelly.com/blog"
+  },
+  "keywords": [
+    "todd anderson",
+    "cucumberjs",
+    "bdd",
+    "tdd"
+  ],
+  "homepage": "https://github.com/bustardcelly/cucumberjs-examples",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bustardcelly/cucumberjs-examples"
+  },
+  "bugs": {
+    "url": "https://github.com/bustardcelly/cucumberjs-examples/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/bustardcelly/cucumberjs-examples/LICENSE-MIT"
+    }
+  ],
+  "scripts": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "cucumber": "~0.3.3"
+  }
+}
