@@ -6,7 +6,7 @@ Feature: Shopper can add an item to their Grocery List
   Scenario: Item added to grocery list
     Given I have an empty grocery list
     When I add an item to the list
-    Then The gorcery list contains a single item
+    Then The grocery list contains a single item
 
   Scenario: Item accessible from grocery list
     Given I have an empty grocery list
