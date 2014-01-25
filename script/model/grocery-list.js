@@ -1,6 +1,9 @@
 'use strict';
 
 var groceryList = {
+  empty: function() {
+    this.list.length = 0;
+  },
   add: function(item) {
     this.list.push(item);
   },
