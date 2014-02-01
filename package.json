@@ -28,9 +28,11 @@
     }
   ],
   "scripts": {
-    "test": "test"
+    "test": "node node_modules/.bin/cucumber-js",
+    "watch": "node cuke-watcher.js"
   },
   "devDependencies": {
-    "cucumber": "~0.3.3"
+    "cucumber": "~0.3.3",
+    "node-watch": "~0.3.4"
   }
 }
