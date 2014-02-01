@@ -1,26 +1,21 @@
-#!/usr/bin/env node
-var watch = require('node-watch');
+var gulp = require('gulp');
+var watch = require('gulp-watch');
 var child_process = require('child_process');
-var running = false;
-var cucumber;
 
-var JS_EXT = /^.*\.js/i;
+var cucumber;
+var running = false;
 var options = ['node_modules/.bin/cucumber-js', 
                'features', 
                '-r', 'features/step_definitions',
                '-f', 'pretty'];
 
-watch(['./features/step_definitions', 'script'], {recursive:true}, function(filename) {
-  
-  if(!running && filename.match(JS_EXT)) {
-
+gulp.task('cucumber', function() {
+  if(!running) {
     running = true;
-    
     cucumber = child_process.spawn('node', options)
                     .on('exit', function() {
                       running = false;
                     });
-
     cucumber.stdout.on('data', function(d) {
       console.log(String(d));
     });
@@ -28,7 +23,12 @@ watch(['./features/step_definitions', 'script'], {recursive:true}, function(file
     cucumber.stderr.on('data', function(d) {
       console.error(String(d));
     });
-
   }
+});
 
+gulp.task('watch-tests', function() {
+  gulp.src(['features/**/*.js', 'script/**/*.js'])
+      .pipe(watch(function() {
+        gulp.run('cucumber');
+      }));
 });
