@@ -1,0 +1,9 @@
+{
+  "test_page": "browser-cukes/cucumber-testrunner.html",
+  "launchers": {
+    "Chrome": {
+      "command": "open http://localhost:7357/browser-cukes/cucumber-testrunner.html /Applications/Google\\ Chrome.app/",
+      "protocol": "tap"
+    }
+  }
+}

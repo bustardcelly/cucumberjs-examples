@@ -10,7 +10,7 @@ var options = ['node_modules/.bin/cucumber-js',
                '-r', 'features/step_definitions',
                '-f', 'pretty'];
 
-watch(['./features/step_definitions', 'script'], {recursive:true}, function(filename) {
+watch(['./features/step_definitions', './script'], {recursive:true}, function(filename) {
   
   if(!running && filename.match(JS_EXT)) {
 
