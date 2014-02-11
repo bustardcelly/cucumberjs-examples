@@ -9,8 +9,7 @@ var outdir = 'test';
 var browserCukes;
 
 var JS_EXT = /^.*\.js/i;
-var options = ['cucumberjs-browser', 
-               '-f', 'ui',
+var options = ['-f', 'ui',
                '-o', outdir,
                '--tmpl', 'template/testrunner.html'];
 
@@ -22,19 +21,18 @@ watch(['./features/step_definitions', 'script'], {recursive:true}, function(file
   if(!running && filename.match(JS_EXT)) {
 
     running = true;
-
     // if /script/*
-    browserify('./script/app.js')
+    browserify(__dirname + '/script/app.js')
       .bundle({
         standalone: 'app.js'
       })
-      .pipe(fs.createWriteStream('./' + outdir + '/script'))
+      .pipe(fs.createWriteStream(__dirname + '/' + outdir + '/script/app.js'))
       .on('close', function() {
         // Live Reload.
       });
 
     // else if features
-    browserCukes = child_process.spawn('node', options)
+    browserCukes = child_process.spawn('cucumberjs-browser', options)
                     .on('exit', function() {
                       running = false;
                       // Live Reload.
