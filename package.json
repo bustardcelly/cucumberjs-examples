@@ -29,7 +29,8 @@
   ],
   "scripts": {
     "test": "node node_modules/.bin/cucumber-js",
-    "watch": "node cuke-watcher.js"
+    "watch": "node cuke-watcher.js",
+    "watch-browser": "node cuke-browser-watcher"
   },
   "devDependencies": {
     "cucumber": "~0.3.3",
@@ -50,6 +51,10 @@
     "karma": "~0.10.9",
     "karma-html2js-preprocessor": "~0.1.0",
     "browserify": "~3.28.1",
-    "mkdirp": "~0.3.5"
+    "mkdirp": "~0.3.5",
+    "tiny-lr": "0.0.5",
+    "connect": "~2.12.0",
+    "open": "0.0.4",
+    "string": "~1.8.0"
   }
 }

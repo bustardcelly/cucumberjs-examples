@@ -6,6 +6,8 @@ var application = require('../../script/app');
 
 var World = function World(callback) {
 
+  // this.window = process.browser ? window : {};
+  
   this.groceryListApplication = undefined;
 
   this.openGroceryList = function() {
