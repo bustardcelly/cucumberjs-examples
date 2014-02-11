@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script src="lib/cucumber.js"></script>
+    <!--<script src="/testem.js"></script>-->
+    <script src="features.js"></script>
+    <% _.each(modules, function(module) { %>
+    <script src="<%= module.filepath %>"></script>
+    <% }); %>
+    <% if(listener.exists) { %>
+      <script src="script/<%= listener.filename %>"></script>
+    <% }; %>
+    <% if(listener.exists && /^ui?/i.test(listener.filename)) { %>
+    <style type="text/css">
+      .cukes-container {
+        margin: 0;
+        font-size: 1em;
+      }
+      .cuke-feature {
+        padding: 1em;
+        margin-bottom: 1em;
+        background-color: beige;
+      }
+      .cuke-step {
+        margin: 0.5em 0;
+      }
+      .cuke-step-pending, .cuke-step-skipped {
+        color: rgb(184, 174, 103);
+      }
+      .cuke-step-pass {
+        color: rgb(119, 184, 103);
+      }
+      .cuke-step-fail {
+        color: rgb(184, 103, 103);
+      }
+      .cuke-fail-description {
+        padding: 1em;
+        word-break: break-word;
+      }
+    </style>
+    <% }; %>
+  </head>
+  <body>
+    <script>
+      (function(window) {
+        
+        // Need to concat all *.features > browserify.standalone = cukefeatures
+        var features = window.cukefeatures.split('&crarr').join('\n');
+
+        // Need to concat all support + step_definitions, and export as a function
+        var support = function() {
+          this.Given = this.When = this.Then = this.defineStep;
+          // Would be put on window if /support/world found.
+          if('world' in window) {
+            this.World = window['world'].World;
+          }
+          <% _.each(steps, function(step) { %>
+          window['<%= step.name %>'].call(this);
+          <% }); %>
+        };
+
+        var runtime = Cucumber(features, support);
+        <% if(listener.exists) { %>
+        runtime.attachListener(window.cukelistener.instance());
+        <% }; %>
+        runtime.start(function(){
+          <% if(listener.exists) { %>
+          window.cukelistener.instance().complete();
+          <% } else { %>
+          console.log(Array.prototype.slice.call(arguments));
+          <% }; %>
+        });
+      }(window));
+    </script>
+    <script src="./script/app.js"></script>
+  </body>
+</html>

@@ -1,6 +1,8 @@
+/*global window*/
 'use strict';
 
-var application = require(process.cwd() + '/script/app');
+// NOTE: had to use relative url for require in steps in order to properly bundle dependencies.
+var application = require('../../script/app');
 
 var World = function World(callback) {
 

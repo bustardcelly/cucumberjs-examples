@@ -3,7 +3,7 @@ Feature: Shopper can add an item to their Grocery List
   I want to add an item to my grocery list
   So that I can remember to buy that item at the grocery store
 
-  Background:
+  Background: Grocery List Application is Open
     Given I have opened the grocery list application
 
   Scenario: Item added to grocery list

@@ -5,7 +5,7 @@ module.exports = function() {
 
   var listItem;
 
-  this.World = require(process.cwd() + '/features/support/world').World;
+  this.World = require('../support/world').World;
 
   this.Given(/^I have an empty grocery list$/, function(callback) {
     this.groceryListApplication.list.empty();
