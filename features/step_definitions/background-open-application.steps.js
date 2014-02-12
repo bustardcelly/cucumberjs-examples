@@ -6,9 +6,13 @@ module.exports = function() {
   this.World = require('../support/world').World;
 
   this.Given(/^I have opened the grocery list application$/, function(callback) {
-    this.groceryListApplication = this.openGroceryList();
-    assert(this.groceryListApplication, 'Grocery List Application is required to be open for editability.');
-    callback();
+    (function(world) {
+      world.domload(function() {
+        world.groceryListApplication = world.openGroceryList();
+        assert(world.groceryListApplication, 'Grocery List Application is required to be open for editability.');
+        callback();
+      });
+    }(this));
   });
 
 };
