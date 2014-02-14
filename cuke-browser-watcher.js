@@ -30,7 +30,7 @@ var wrap = function(wrapperTemplate) {
   return map(function(file, cb) {
     var content = file.toString();
     fs.readFile(path.resolve(wrapperTemplate), 'utf8', function(err, filedata) {
-      cb(null, tmpl(filedata, {yield:content}));
+      cb(null, filedata.replace(/[^]<%= yield %>/i, content));
     });
   });
 };
@@ -67,7 +67,7 @@ var templateTestRunner = function(callback) {
 var cuke = function(f, callback) {
   return function() {
     var filename = S(path.basename(f, '.js').split('.').join('-')).camelize().s;
-    // templateTestRunner(function() {
+    templateTestRunner(function() {
       browserCukes = child_process.spawn('cucumberjs-browser', options)
         .on('exit', function() {
           console.log('changed ' + filename + '...');
@@ -77,7 +77,7 @@ var cuke = function(f, callback) {
             }
           });
         });
-    // });
+    });
   };
 };
 
