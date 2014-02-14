@@ -1,6 +1,6 @@
 {
   "name": "cucumberjs-examples",
-  "version": "0.1.0",
+  "version": "0.5.1",
   "description": "Examples of using CucumberJS.",
   "author": {
     "name": "Todd Anderson",
@@ -30,7 +30,8 @@
   "scripts": {
     "test": "node node_modules/.bin/cucumber-js",
     "watch": "node cuke-watcher.js",
-    "watch-browser": "node cuke-browser-watcher"
+    "watch-browser": "node cuke-browser-watcher",
+    "build": "node build.js"
   },
   "devDependencies": {
     "cucumber": "~0.3.3",
@@ -55,6 +56,9 @@
     "tiny-lr": "0.0.5",
     "connect": "~2.12.0",
     "open": "0.0.4",
-    "string": "~1.8.0"
+    "string": "~1.8.0",
+    "map-stream": "~0.1.0",
+    "rimraf": "~2.2.6",
+    "lodash.template": "~2.4.1"
   }
 }

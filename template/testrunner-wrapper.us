@@ -76,12 +76,7 @@
         });
       }(window));
     </script>
-    <ul id="grocery-list"></ul>
-    <form>
-      <label for="itemInput">Item name:</label>
-      <input id="item-input" name="itemInput" type="text"></item>
-      <button id="add-button" type="button">add</button>
-    </form>
+    <%= yield %>
     <script src="./script/app.js"></script>
   </body>
 </html>

@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 var fs = require('fs');
 var path = require('path');
+var map = require('map-stream');
+var tmpl = require('lodash.template');
 var watch = require('node-watch');
 var child_process = require('child_process');
 var mkdirp = require('mkdirp');
+var rimraf = require('rimraf');
 var browserify = require('browserify');
 
 var http = require('http');
@@ -12,6 +15,7 @@ var connect = require('connect');
 var open = require('open');
 var S = require('string');
 
+var tempdir = '.tmp';
 var outdir = 'test';
 var browserCukes;
 
@@ -20,7 +24,16 @@ var connectPort = 8080;
 var JS_EXT = /^.*\.js/i;
 var options = ['-f', 'ui',
                '-o', outdir,
-               '--tmpl', 'template/testrunner.html'];
+               '--tmpl', tempdir + '/testrunner.html'];
+
+var wrap = function(wrapperTemplate) {
+  return map(function(file, cb) {
+    var content = file.toString();
+    fs.readFile(path.resolve(wrapperTemplate), 'utf8', function(err, filedata) {
+      cb(null, tmpl(filedata, {yield:content}));
+    });
+  });
+};
 
 // [TASKS]
 // a. re-bundle the app.
@@ -39,22 +52,38 @@ var bundleApplication = function(f, callback) {
       });
   };
 };
-// b. rerun cucumberjs-browser tool.
+// b. template testrunner with app partial.
+var templateTestRunner = function(callback) {
+  fs.createReadStream(__dirname + '/template/app-main.us')
+    .pipe(wrap(__dirname + '/template/testrunner-wrapper.us'))
+    .pipe(fs.createWriteStream(path.resolve(tempdir + '/testrunner.html')))
+    .on('close', function() {
+      if(callback) {
+        callback();
+      }
+    });
+};
+// c. rerun cucumberjs-browser tool.
 var cuke = function(f, callback) {
   return function() {
     var filename = S(path.basename(f, '.js').split('.').join('-')).camelize().s;
-    browserCukes = child_process.spawn('cucumberjs-browser', options)
-      .on('exit', function() {
-        console.log('changed ' + filename + '...');
-        if(callback) {
-          callback();
-        }
-      });
+    // templateTestRunner(function() {
+      browserCukes = child_process.spawn('cucumberjs-browser', options)
+        .on('exit', function() {
+          console.log('changed ' + filename + '...');
+          rimraf(tempdir, function() {
+            if(callback) {
+              callback();
+            }
+          });
+        });
+    // });
   };
 };
 
 // 1. Recursive mkdir /test/script if not exist.
 mkdirp.sync(outdir + '/script');
+mkdirp.sync(tempdir);
 
 // 2. Create tiny-livereload server.
 var lr = tinylr();
