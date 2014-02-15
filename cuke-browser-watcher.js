@@ -22,7 +22,7 @@ var browserCukes;
 var livereloadPort = 35729;
 var connectPort = 8080;
 var JS_EXT = /^.*\.js/i;
-var options = ['-f', 'ui',
+var options = ['-f', 'tap',
                '-o', outdir,
                '--tmpl', tempdir + '/testrunner.html'];
 

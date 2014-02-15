@@ -3,6 +3,8 @@ cucumberjs-examples
 
 > Source for post series: [BDD in JavaScript: CucumberJS](http://custardbelly.com/blog/blog-posts/2014/01/08/bdd-in-js-cucumberjs/index.html) 
 
+[![browser support](https://ci.testling.com/bustardcelly/cucumberjs-examples.png)](https://ci.testling.com/bustardcelly/cucumberjs-examples)
+
 <a href="https://saucelabs.com/u/custardbelly">
   <img src="https://saucelabs.com/browser-matrix/custardbelly.svg?auth=2f671a5d8f345d81bbe7f0abcef72176" alt="Selenium Tests Status" />
 </a>

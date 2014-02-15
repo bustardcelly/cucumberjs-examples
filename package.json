@@ -33,6 +33,17 @@
     "watch-browser": "node cuke-browser-watcher",
     "build": "node build.js"
   },
+  "testling" : {
+      "html" : "test/cucumber-testrunner.html",
+      "browsers" : [
+          "ie/6..latest",
+          "chrome/20..latest",
+          "firefox/10..latest",
+          "safari/latest",
+          "opera/11.0..latest",
+          "iphone/6", "ipad/6"
+      ]
+  },
   "devDependencies": {
     "cucumber": "~0.3.3",
     "node-watch": "~0.3.4",
