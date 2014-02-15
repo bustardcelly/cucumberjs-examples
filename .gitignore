@@ -2,5 +2,4 @@
 npm-debug.log
 *.sublime*
 node_modules
-test
 build

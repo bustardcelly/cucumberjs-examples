@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script src="lib/cucumber.js"></script>
+    <!--<script src="/testem.js"></script>-->
+    <script src="features.js"></script>
+    
+    <script src="world.js"></script>
+    
+    <script src="addItemViewSteps.js"></script>
+    
+    <script src="addItemSteps.js"></script>
+    
+    <script src="backgroundOpenApplicationSteps.js"></script>
+    
+    
+      <script src="script/tap-listener.js"></script>
+    
+    
+  </head>
+  <body>
+    <script>
+      (function(window) {
+        
+        // Need to concat all *.features > browserify.standalone = cukefeatures
+        var features = window.cukefeatures.split('&crarr').join('\n');
+
+        // Need to concat all support + step_definitions, and export as a function
+        var support = function() {
+          this.Given = this.When = this.Then = this.defineStep;
+          // Would be put on window if /support/world found.
+          if('world' in window) {
+            this.World = window['world'].World;
+          }
+          
+          window['addItemViewSteps'].call(this);
+          
+          window['addItemSteps'].call(this);
+          
+          window['backgroundOpenApplicationSteps'].call(this);
+          
+        };
+
+        var runtime = Cucumber(features, support);
+        
+        runtime.attachListener(window.cukelistener.instance());
+        
+        runtime.start(function(){
+          
+          window.cukelistener.instance().complete();
+          
+        });
+      }(window));
+    </script>
+   <ul id="grocery-list"></ul>
+<form>
+  <label for="itemInput">Item name:</label>
+  <input id="item-input" name="itemInput" type="text"></item>
+  <button id="add-button" type="button">add</button>
+</form>
+    <script src="./script/app.js"></script>
+  </body>
+</html>
