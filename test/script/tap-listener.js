@@ -52,11 +52,14 @@ var listener = {
         var stepResult = event.getPayloadItem('stepResult');
         if (stepResult.isSuccessful()) {
           test.pass(currentStep.getName());
-        } else if (stepResult.isPending()) {
+        }
+        else if (stepResult.isPending()) {
           test.skip(currentStep.getName());
-        } else if (stepResult.isUndefined() || stepResult.isSkipped()) {
+        }
+        else if (stepResult.isUndefined() || stepResult.isSkipped()) {
           test.skip(currentStep.getName());
-        } else {
+        }
+        else {
           var error = stepResult.getFailureException();
           var errorMessage = error.stack || error;
           test.fail(errorMessage);

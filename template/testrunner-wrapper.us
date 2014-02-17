@@ -3,7 +3,9 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <script src="lib/cucumber.js"></script>
-    <!--<script src="/testem.js"></script>-->
+    <% if(listener.format === 'testem') { %>
+    <script src="/testem.js"></script>
+    <% }; %>
     <script src="features.js"></script>
     <% _.each(modules, function(module) { %>
     <script src="<%= module.filepath %>"></script>

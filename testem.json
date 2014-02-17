@@ -1,8 +1,16 @@
 {
-  "test_page": "browser-cukes/cucumber-testrunner.html",
+  "test_page": "test/cucumber-testrunner.html",
   "launchers": {
     "Chrome": {
-      "command": "open http://localhost:7357/browser-cukes/cucumber-testrunner.html /Applications/Google\\ Chrome.app/",
+      "command": "open http://localhost:7357/test/cucumber-testrunner.html /Applications/Google\\ Chrome.app/",
+      "protocol": "tap"
+    },
+    "Safari": {
+      "command": "open http://localhost:7357/test/cucumber-testrunner.html /Applications/Safari.app/",
+      "protocol": "tap"
+    },
+    "Firefox": {
+      "command": "open http://localhost:7357/test/cucumber-testrunner.html /Applications/Firefox.app/",
       "protocol": "tap"
     }
   }
